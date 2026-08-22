@@ -1,0 +1,57 @@
+---
+title: Shadow Circuit
+orderList:
+  - 0
+  - 1
+  - 0
+  - 2
+  - 3
+  - 1
+  - 4
+  - 5
+  - 2
+  - 6
+  - 7
+  - 8
+speed: 6
+bpm: 125
+instruments:
+  - id: 1
+    source: st01
+    name: ST-01/BassDrum4
+    volume: 64
+  - id: 2
+    source: st01
+    name: ST-01/Snare3
+    volume: 58
+  - id: 3
+    source: st01
+    name: ST-01/CloseHiHat
+    volume: 44
+  - id: 4
+    source: st01
+    name: ST-01/DeepBass
+    volume: 56
+  - id: 5
+    source: st01
+    name: ST-01/NightMare
+    volume: 40
+    start: 0x0
+    length: 0x1
+  - id: 6
+    source: st01
+    name: ST-01/Mechanic2
+    volume: 50
+    # optionally add a loop later
+    #start: 0x0
+    #length: 0x1
+  - id: 7
+    source: st02
+    name: ST-02/Perc-Timpani
+    volume: 56
+  - id: 8
+    source: st02
+    name: ST-02/Siren
+    volume: 46
+    start: 0x0
+    length: 0x1
