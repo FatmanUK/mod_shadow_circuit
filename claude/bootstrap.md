@@ -4,15 +4,17 @@
 Compose a suspenseful, thumping, looping load-screen tune titled **"Shadow Circuit"**,
 in the style of Ray Norrish / Alistair Brimble, as source for a genuine **ProTracker 2**
 4-channel `.mod` file. Nine unique 64-row patterns, ~90 seconds of arranged playtime,
-built entirely from 9 real samples taken from the ST-01/ST-02 Ultimate Soundtracker disks.
-Patterns are being composed and reviewed **one at a time** — the user auditions each
-in MilkyTracker before the next is written.
+built from real samples taken from the ST-01/ST-02 Ultimate Soundtracker disks.
+Patterns were composed and reviewed **one at a time** — the user enters each pattern
+into **MilkyTracker themselves** and auditions it there; that was the review method
+for the entire project.
 
-**All 9 patterns are now composed and confirmed.** The composition itself is complete.
-
-Current focus: the user wants to take another pass at improving **Pattern06
-("Breakdown")** specifically — it was a difficult pattern to land
-(see Open Issues) and isn't considered fully settled by the user despite being confirmed.
+**PROJECT COMPLETE.** All 9 patterns are composed and have passed audition, including
+Pattern06 ("Breakdown"), which was scrapped and rewritten from scratch late in the
+project after extensive iteration (see Open Issues/History for the full story — it's
+informative if this pattern ever needs touching again). No further composition work is
+anticipated; remaining tasks (loop points, finetune, per-sample volume header values) are
+explicitly the user's own to finish outside this collaboration.
 
 ## 2. State of Play
 
@@ -24,6 +26,9 @@ Current focus: the user wants to take another pass at improving **Pattern06
 - Pattern text notation for MilkyTracker entry:
   `RR | NNN SS ECC | NNN SS ECC | NNN SS ECC | NNN SS ECC`
   (Note 3-char or `...`; Sample 2-digit hex or `..`; Effect 1-digit cmd + 2-digit hex param or `...`)
+  Rows where every channel is empty are omitted when displaying a pattern (confirmed
+  acceptable to the user); rows with any content must be shown in full, never abbreviated
+  or described as "repeat to end."
 
 ### Tempo
 **Speed 6, Tempo 125** (set once via `Fxx` at Pattern00 row 00; carries forward
@@ -36,97 +41,98 @@ seconds/pattern-play.
 | 01 | BassDrum4 | Kick / pulse | 64 | No |
 | 02 | Snare3 | Backbeat | 58 | No |
 | 03 | CloseHiHat | Ticking texture | 44 | No |
-| 04 | DeepBass | Bass pulse-cell / chromatic descent | 56 | **No** — tried and rejected, see below |
+| 04 | DeepBass | Bass pulse-cell / chromatic descent / faint motif echo | 56 | **No** — tried and rejected |
 | 05 | NightMare | Atmosphere pad | 40 | **Yes, forward** |
-| 06 | Mechanic2 | Mechanical stab / diagnostic chime | 50 | No |
+| 06 | Mechanic2 | Mechanical stab / diagnostic chime / closing callback | 50 | No |
 | 07 | Perc-Timpani | Dramatic hit | 56 | No |
 | 08 | Siren | Tension riser | 46 | **Yes, forward** |
-| 09 | Sweep | Sustained atmosphere/drone accent | 20 | **Yes, forward** |
+| 09 | Sweep | Sustained atmosphere accent | 20 | **Yes, forward** |
 
 **DeepBass loop history:** briefly looped mid-project to solve a Pattern02 portamento
 problem; failed because its envelope decays continuously with no plateau (any loop point
 either loops the harsh transient or loops near-silence). Removed; not a loop candidate.
-Pattern02's ending slide was reassigned to NightMare; Pattern03's drone role went to the
-newly-added Sweep.
 
 Loop point data itself (start/length) is the user's responsibility throughout; this
 project only flags which samples need one.
 
-### Pattern role map / order list (all confirmed)
+### Pattern role map / order list (all 9 confirmed)
 | # | Name | Character |
 |---|---|---|
-| 00 | Main Thump | Thematic seed — kick pulse + DeepBass motif + atmosphere |
+| 00 | Main Thump | Thematic seed — kick pulse + DeepBass motif (E-D-C cell) + atmosphere |
 | 01 | Main Thump B | Same pulse, hi-hat doubles to 8ths, Snare3 backbeat enters |
 | 02 | Dark Variation | DeepBass runs a chromatic descent; NightMare slides down into it at the end |
 | 03 | Diagnostic Chime | Pulled-back; Mechanic2-led scan motif (arpeggio); Sweep sustains underneath |
 | 04 | Rising Tension | Groove = Main Thump B; Siren enters, rises continuously all pattern, snare sits out |
 | 05 | Peak Thump | Fullest arrangement — full chromatic bass every bar, extra kick hits into each barline, snare returns, Siren steps back |
-| 06 | Breakdown | Stripped back — quiet kick pulse, NightMare/Sweep as periodic pulses (not a drone — see Open Issues), single Perc-Timpani accent |
+| 06 | Breakdown | Sparsest pattern — quiet kick pulse, a faint one-note-per-bar echo of the seed motif, Sweep/NightMare as periodic pulses (not a drone), Perc-Timpani accent, Mechanic2 closing callback |
 | 07 | Return Pulse | Groove rebuilds bar-by-bar from silence back to Main Thump B density |
 | 08 | Loop Bridge | Mirror of Pattern07 — winds density back down to Pattern00's own sparse opening texture, for a seamless loop |
 
 **Order list:** `00, 01, 00, 02, 03, 01, 04, 05, 02, 06, 07, 08` → loops to 00.
 12 plays × 7.68s = **92.16 seconds**.
 
-### Effects used (all 8 introduced across the piece, each explained on first appearance)
-- **`Fxx`** — Speed/Tempo. 00–1F sets Speed (ticks/row); 20–FF sets Tempo (BPM). First:
-  Pattern00 row 00 (`F06` speed 6, `F7D` tempo 125).
-- **`Cxx`** — Set Volume. Sets that note's volume directly (00–40 hex); only for that one
-  trigger, must be restated every row wanted. First: Pattern01 (hi-hat accent alternation).
-- **`3xx`** — Tone Portamento. Glides toward the note written on that row (no retrigger)
-  at rate `xx`/tick; `00` reuses the last rate. First: Pattern02 (moved from DeepBass to
-  NightMare after DeepBass's loop failure).
-- **`0xy`** — Arpeggio. Cycles between the note's own pitch, +x semitones, +y semitones,
-  one per tick. First: Pattern03 (Mechanic2 diagnostic chime, `037`).
-- **`1xx`** — Portamento Up. Continuously raises pitch (lowers period) by `x`/tick, no
-  destination, clamps at table bounds. First: Pattern04 (Siren's continuous rise).
-- **`2xx`** — Portamento Down. Mirror of `1xx`, continuously lowers pitch. First: Pattern06
-  (NightMare's descent, continuing from Pattern02's landing pitch).
-- **`4xy`** — Vibrato. Oscillates pitch around the current note at speed `x`, depth `y`.
-  First: Pattern06 (NightMare) — initial values (speed 3/depth 5) were far too strong
-  ("unhappy bees"); reduced to speed 1/depth 2.
-- **`7xy`** — Tremolo. Same mechanism as vibrato but modulates volume instead of pitch.
-  First: Pattern06 (Sweep) — added specifically to differentiate Sweep's movement from
-  NightMare's vibrato so the two channels wouldn't sound identical.
+### Effects used (9 introduced across the piece, each explained on first appearance)
+- **`Fxx`** — Speed/Tempo. First: Pattern00 (`F06` speed 6, `F7D` tempo 125).
+- **`Cxx`** — Set Volume (one-shot per trigger, must be restated each row wanted). First:
+  Pattern01 (hi-hat accents).
+- **`3xx`** — Tone Portamento (glide to the row's note, no retrigger). First: Pattern02
+  (moved from DeepBass to NightMare after DeepBass's loop failure).
+- **`0xy`** — Arpeggio (cycles pitch, +x, +y semitones per tick). First: Pattern03
+  (Mechanic2 diagnostic chime, `037`); reused as a closing callback in Pattern06.
+- **`1xx`** — Portamento Up (continuous, no destination, clamps at table bounds). First:
+  Pattern04 (Siren's rise).
+- **`2xx`** — Portamento Down (mirror of `1xx`). First: an earlier draft of Pattern06 that
+  was later scrapped — **not present in the final Pattern06**, but documented here in
+  case it's useful elsewhere later.
+- **`4xy`** / **`7xy`** — Vibrato / Tremolo. Also introduced in an earlier, scrapped
+  Pattern06 draft (the "sustained drone" version) — **not present in the final version**.
+  Kept here for reference: `4xy` oscillates pitch, `7xy` oscillates volume, both at
+  speed `x`/depth `y`.
+- **`Axy`** — Volume Slide (up by `x` or down by `y` per tick). Also introduced and then
+  scrapped in Pattern06's fade-out draft — **not present in the final version**.
+- **`ECx`** — Note Cut. Silences the channel `x` ticks into the row, for a precise,
+  decisive cutoff rather than a gradual fade. First (and currently only) use: final
+  Pattern06, cutting NightMare's loop cleanly in the last bar.
+
+Net effect count actually present in the final 9 patterns: `Fxx, Cxx, 3xx, 0xy, 1xx,
+ECx` (six). The others (`2xx, 4xy, 7xy, Axy`) were explored specifically for Pattern06
+before it was rewritten and don't appear in the final composition, but are documented
+above in case a similar texture is wanted in future work.
 
 ## 3. Dependency Map
-- Raw sample files (real ST-01/ST-02 extractions, 8-bit signed PCM, no header), plus
-  Sweep (user-sourced separately):
+- Raw sample files (real ST-01/ST-02 extractions, 8-bit signed PCM, no header):
   `/mnt/user-data/uploads/{BassDrum4, Snare3, CloseHiHat, DeepBass, NightMare, Mechanic2, Perc-Timpani, Siren, Sweep}`
-- `/home/claude/ptcore.py` — Python/numpy renderer used only for the very first Pattern00
-  audio preview, early in the project. **Not used since** — the user does all auditioning
-  by importing pattern text directly into MilkyTracker; no further WAV previews were
-  generated or needed after that point.
 - `/home/claude/pattern00.py` — canonical event data for Pattern00's DeepBass line
   (internal octave numbering, display = internal + 3). Reused directly for Pattern01,
-  Pattern04, Pattern07, and Pattern08's bass lines to guarantee note-for-note consistency
-  across patterns that share the same pulse-cell.
+  Pattern04, Pattern07, and Pattern08's bass lines.
 - No external libraries beyond Python 3.12 + numpy 2.4.4.
 
 ## 4. Open Issues
 - Finetune and per-sample volume *header* values (vs. the mix-balance recommendations in
-  the sample table) remain explicitly deferred — not yet addressed at user's request.
-- **Pattern06 ("Breakdown") took the most iteration of any pattern in the project** and,
-  despite passing audition, the user considers it unfinished and wants to revisit it next.
-  History of what was tried: (1) original design used DeepBass as a sustained drone —
-  failed, DeepBass doesn't loop well (see Sample Table). (2) Replaced with Sweep, but the
-  Pattern02→06 transition was jarring in both Ch2 and Ch4 (abrupt sample swap on Ch2;
-  NightMare retriggering instead of continuing its already-landed pitch on Ch4) — fixed
-  by delaying Sweep's entry and having NightMare continue instead of retrigger. (3) The
-  descent glide was "too low for comfort" — shortened and re-targeted. (4) The sustained
-  tones with vibrato/tremolo modulation read as "identical unhappy bees" — differentiated
-  by using tremolo on Sweep vs. vibrato on NightMare, and toning down speed/depth
-  substantially. (5) Even after all that, the user judged it "too sparse to be musical" —
-  added back a quiet per-bar kick pulse and a single Perc-Timpani accent at the midpoint.
-  (6) Asked directly what was still wrong, user identified: **the core concept of a
-  nonstop sustained drone is wrong for this style** — tracker music wants discrete
-  triggered events even in its quietest moments. Rebuilt Ch2/Ch4 as periodic
-  once-per-bar pulses instead of continuous held tones with modulation (current/final
-  version below). This passed audition but the user flagged wanting to look at it again.
-  User has since manually added a `C#4` note on Sweep (Ch2) at row `20` (hex) — included
-  in the current table below.
+  the sample table) remain explicitly deferred — user's own task.
+- Loop point data (start/length) for NightMare, Siren, Sweep — user's own task (Sweep's
+  points were already sourced by the user mid-project).
 - Order list totals 92.16s vs. the "~90s" target — accepted as within stated creative
   latitude.
+- **Pattern06 full history** (useful if ever revisited): (1) original design used
+  DeepBass as a sustained drone — failed, doesn't loop well. (2) Replaced with Sweep, but
+  the Pattern02→06 transition was jarring on both Ch2 and Ch4 — fixed by delaying Sweep's
+  entry and having NightMare continue rather than retrigger. (3) The descent glide was
+  "too low for comfort" — shortened. (4) Vibrato/tremolo modulation on sustained tones
+  read as "identical unhappy bees" — toned down and differentiated, still didn't land.
+  (5) Judged "too sparse to be musical" — added a kick pulse and Perc-Timpani accent.
+  (6) User identified the root cause directly: **a nonstop sustained drone is the wrong
+  musical language for tracker music**, which wants discrete triggered events even at
+  its quietest. Rebuilt as periodic once-per-bar pulses — passed audition. (7) With
+  Pattern02 and Pattern07 now both finalized as neighbors, attempted a volume-slide
+  fade-to-silence ending for a clean bookend — user rejected this as "just a fade,"
+  not real content. (8) **Final rewrite**: scrapped entirely and rebuilt around a faint,
+  one-note-per-bar echo of the Pattern00 seed motif (E-D-C, very quiet) — the piece's
+  actual musical identity, which had been completely absent from this pattern until
+  then — plus a decisive `ECx` note-cut and a Mechanic2 arpeggio callback to Diagnostic
+  Chime as the closing gesture. **This version passed audition.** The user noted the
+  closing Mechanic2 arpeggio lands with unintended comedic timing (a chiptune "boop" as
+  the last sound after a hushed, ghostly build-up) but chose to keep it as-is.
 
 ## 5. "Golden" Code Blocks — all 9 patterns, final confirmed versions
 
@@ -270,7 +276,6 @@ Row | Ch1        | Ch2        | Ch3        | Ch4
 3A  | ... .. ... | ... .. ... | ... .. ... | C-4 06 037
 3E  | ... .. ... | ... .. ... | ... .. ... | C-4 06 037
 ```
-(All unlisted rows: no events in any channel.)
 
 ### Pattern04 — Rising Tension
 ```
@@ -278,68 +283,40 @@ Row | Ch1        | Ch2        | Ch3        | Ch4
 00  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. ...
 01  | ... .. ... | ... .. ... | ... .. ... | C-3 08 ...
 02  | ... .. ... | E-4 04 ... | C-4 03 C20 | ... .. 101
-03  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 04  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-05  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 06  | ... .. ... | D-4 04 ... | C-4 03 C20 | ... .. 101
-07  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 08  | C-4 01 ... | C-4 04 ... | C-4 03 C38 | ... .. 101
-09  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 0A  | ... .. ... | ... .. ... | C-4 03 C20 | ... .. 101
-0B  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 0C  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-0D  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 0E  | ... .. ... | C-4 04 ... | C-4 03 C20 | ... .. 101
-0F  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 10  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-11  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 12  | ... .. ... | E-4 04 ... | C-4 03 C20 | ... .. 101
-13  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 14  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-15  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 16  | ... .. ... | D-4 04 ... | C-4 03 C20 | ... .. 101
-17  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 18  | C-4 01 ... | D#4 04 ... | C-4 03 C38 | ... .. 101
-19  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 1A  | ... .. ... | ... .. ... | C-4 03 C20 | ... .. 101
-1B  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 1C  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-1D  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 1E  | ... .. ... | C-4 04 ... | C-4 03 C20 | ... .. 101
-1F  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 20  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-21  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 22  | ... .. ... | E-4 04 ... | C-4 03 C20 | ... .. 101
-23  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 24  | C-4 01 ... | E-4 04 ... | C-4 03 C38 | ... .. 101
-25  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 26  | ... .. ... | D-4 04 ... | C-4 03 C20 | ... .. 101
-27  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 28  | C-4 01 ... | C-4 04 ... | C-4 03 C38 | ... .. 101
-29  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 2A  | ... .. ... | ... .. ... | C-4 03 C20 | ... .. 101
-2B  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 2C  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-2D  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 2E  | ... .. ... | C-4 04 ... | C-4 03 C20 | ... .. 101
-2F  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 30  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-31  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 32  | ... .. ... | E-4 04 ... | C-4 03 C20 | ... .. 101
-33  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 34  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-35  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 36  | ... .. ... | D-4 04 ... | C-4 03 C20 | ... .. 101
-37  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 38  | C-4 01 ... | C#4 04 ... | C-4 03 C38 | ... .. 101
-39  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 3A  | ... .. ... | ... .. ... | C-4 03 C20 | ... .. 101
-3B  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 3C  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. 101
-3D  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 3E  | ... .. ... | C-4 04 ... | C-4 03 C20 | ... .. 101
-3F  | ... .. ... | ... .. ... | ... .. ... | ... .. 101
 ```
+(Ch4 carries `... .. 101` on every row from `02` through `3F` continuously — shown above
+only where it coincides with content on other channels; the effect is unbroken across
+every intervening row too.)
 
 ### Pattern05 — Peak Thump
 ```
@@ -386,17 +363,26 @@ Row | Ch1        | Ch2        | Ch3        | Ch4
 3E  | C-4 01 ... | C-4 04 ... | C-4 03 C20 | ... .. ...
 ```
 
-### Pattern06 — Breakdown (confirmed, but user plans to revisit — see Open Issues)
+### Pattern06 — Breakdown (FINAL rewritten version)
 ```
 Row | Ch1        | Ch2        | Ch3        | Ch4
 00  | C-4 01 C20 | ... .. ... | ... .. ... | ... .. ...
+08  | ... .. ... | E-4 04 C18 | ... .. ... | ... .. ...
 10  | C-4 01 C20 | C-4 09 ... | ... .. ... | C-4 05 ...
+18  | ... .. ... | D-4 04 C18 | ... .. ... | ... .. ...
 20  | C-4 01 C20 | C#4 09 ... | C-3 07 ... | C-4 05 ...
-30  | C-4 01 C20 | C-4 09 ... | ... .. ... | C-4 05 ...
+28  | ... .. ... | C-4 04 C18 | ... .. ... | ... .. ...
+30  | C-4 01 C20 | ... .. ... | ... .. ... | ... .. ...
+34  | ... .. ... | C-4 04 C20 | ... .. ... | ... .. EC4
+38  | ... .. ... | ... .. ... | C-4 06 037 | ... .. ...
 ```
-(All unlisted rows: no events in any channel. Row `00` Ch4 is deliberately silent —
-NightMare is still sounding there, continuing from Pattern02's landing pitch. The `C#4`
-at row `20` Ch2 was added manually by the user after the last delivered version.)
+Row `00` Ch4 is deliberately silent — NightMare is still sounding there, continuing from
+Pattern02's landing pitch (no retrigger). The faint DeepBass notes at `08/18/28` (E-D-C,
+volume `18` hex) are a whispered echo of the Pattern00 seed motif. The note at `34`
+(volume `20`, slightly more present) is DeepBass's closing gesture — retriggering Ch2
+naturally silences Sweep with no fade needed. `EC4` on Ch4 cleanly cuts NightMare. The
+Mechanic2 arpeggio at `38` is a quiet callback to Diagnostic Chime — noted by the user as
+landing with unintended comedic timing, kept as-is by choice.
 
 ### Pattern07 — Return Pulse
 ```
@@ -465,22 +451,19 @@ Row | Ch1        | Ch2        | Ch3        | Ch4
 38  | ... .. ... | C#4 04 ... | ... .. ... | ... .. ...
 3E  | ... .. ... | C-4 04 ... | ... .. ... | ... .. ...
 ```
-(By the last bar, only the single kick hit at row `30` and the DeepBass cell remain — no
-hi-hat, no snare — matching Pattern00's own opening texture for a seamless loop.)
+By the last bar, only the single kick hit at row `30` and the DeepBass cell remain — no
+hi-hat, no snare — matching Pattern00's own opening texture for a seamless loop.
 
 ## 6. Testing State
-All 9 patterns have been reviewed by the user in MilkyTracker (their consistent audition
-method throughout the project) and **all have passed audition**. Pattern06 is the
-exception in spirit if not in fact: it technically passed but only after six rounds of
-revision, and the user considers it worth another look. Every other pattern passed
-cleanly, several on the first attempt (Pattern00, Pattern01, Pattern04, Pattern05,
-Pattern07, Pattern08) or with one correction (Pattern02, Pattern03).
+**All 9 patterns have passed audition in MilkyTracker.** Several passed on the first
+attempt (Pattern00, Pattern01, Pattern04, Pattern05, Pattern07, Pattern08); Pattern02 and
+Pattern03 each needed one correction; Pattern06 needed a full rewrite after six rounds of
+revision before landing. The composition is considered finished.
 
 ## 7. Next Steps
-- Take another pass at **Pattern06 ("Breakdown")** with the user — the current version
-  (periodic pulses on Ch2/Ch4 instead of a sustained drone, plus the user's manual `C#4`
-  addition) is the last agreed state, but not considered finished.
-- No other patterns are open for revision unless the user raises something.
-- Once Pattern06 (if revised) is re-confirmed, the composition is done — no further
-  structural work is anticipated; only loop-point data, finetune, and per-sample volume
-  header values remain, all explicitly the user's own remaining task.
+- None anticipated for composition. Remaining work is entirely the user's own: finetune
+  values, per-sample volume header values, and loop point data (start/length) for
+  NightMare, Siren, and Sweep.
+- If Pattern06 is ever revisited again, the full history in Open Issues explains what was
+  tried and why, including effects that were explored and then dropped (`2xx`, `4xy`,
+  `7xy`, `Axy`) — useful context to avoid re-treading the same dead ends.

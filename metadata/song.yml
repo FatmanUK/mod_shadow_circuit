@@ -1,6 +1,6 @@
 ---
 title: Shadow Circuit
-#message: Written with Claude   Sonnet 5 (Medium).    LLMs have proven      surprisingly good at  generating Protracker 2 mods. There is lots of room here for text.Last line of message. Actual last line.
+message: Written with Claude   Sonnet 5. It's really surprisingly good at  this. The mod was     designed and composed in two days. Check outthe Github repository for more details.     This line left empty. 
 orderList:
   - 0
   - 1
@@ -43,9 +43,7 @@ instruments:
     source: st01
     name: ST-01/Mechanic2
     volume: 50
-    # optionally add a loop later
-    #start: 0x0
-    #length: 0x1
+    # maybe add a loop?
   - id: 7
     source: st02
     name: ST-02/Perc-Timpani
