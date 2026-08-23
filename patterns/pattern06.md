@@ -1,4 +1,4 @@
-[Claude got very stuck on this one. I accepted it for the sake of momentum and revisited later.]
+[Claude got very stuck on this one. I accepted it for the sake of momentum and revisited later. In other news, I goofed. I told it to stop abbreviating the patterns --- meaning I needed it to not say things like "repeat this pattern 32 times", as ptgen can't parse that. But it also stopped omitting empty rows. Facepalm.]
 
 # Pattern06 — "Breakdown"
 
