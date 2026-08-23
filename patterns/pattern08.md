@@ -7,7 +7,9 @@ The mirror image of Pattern07's build-up: instead of rebuilding, this one winds 
 - **Bar 3:** hi-hat thins to just two sparse hits (echoing Pattern00's original hi-hat).
 - **Bar 4:** only a single kick hit (the downbeat) and the bass cell remain — the same texture Pattern00 itself opens with, before its own hi-hat and atmosphere join back in.
 
-I deliberately left NightMare untouched here — Pattern00's NightMare entrance should land as a fresh, deliberate re-arrival of the seed, not be pre-empted by a preview in the bridge.```
+I deliberately left NightMare untouched here — Pattern00's NightMare entrance should land as a fresh, deliberate re-arrival of the seed, not be pre-empted by a preview in the bridge.
+
+```
 Row | Ch1        | Ch2        | Ch3        | Ch4
 ------------------------------------------------------
 00  | C-4 01 ... | ... .. ... | C-4 03 C38 | ... .. ...
