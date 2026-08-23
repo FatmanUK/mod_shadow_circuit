@@ -12,5 +12,6 @@ For a suspenseful, thumping, Norrish/Brimble-style loader loop, I'd go with:
 | 6 | ST-01/Mechanic2 | Industrial/mechanical stab — tension accent | 128, has its own internal swell | **50** | Accent-level, lets its shape read without dominating | Has its own internal swell (35→47→**80**→60→36) then settles, doesn't fully decay | **Optional** — no loop needed for a stab; only loop it if we later want it as a sustained mechanical drone |
 | 7 | ST-02/Perc-Timpani | Low dramatic percussion hit | 127 (full) | **56** | Dramatic but not overpowering | Decay cleanly to near-silence by the end | **No loop** — natural one-shots |
 | 8 | ST-02/Siren | Tension riser / alarm sweep | 125 (full) | **46** | Tension accent, not a lead | Decays to near-zero (48→4.7) on its own | **Yes, forward loop** — not because of its natural envelope, but because its *function* is a held tension riser across several bars; without a loop it'll just thud out |
+| 9 | ST-01/Sweep | Sustained atmosphere drone | ??? | **32** | | | **Yes, forward loop** |
 
 That gives kick/snare/hat for the thumping groove, DeepBass for the pulse, and NightMare/Mechanic2/Timpani/Siren for the suspenseful, moody texture layer typical of that sound.

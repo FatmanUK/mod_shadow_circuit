@@ -59,3 +59,9 @@ instruments:
     length: 0x0425
     #start: 0x1a3b
     #length: 0x0430
+  - id: 9
+    source: st01
+    name: ST-01/Sweep
+    volume: 20
+    start: 0xdae
+    length: 0x2da
