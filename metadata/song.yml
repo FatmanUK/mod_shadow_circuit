@@ -51,12 +51,10 @@ instruments:
   - id: 8
     source: st02
     name: ST-02/Siren
-    volume: 46
-    # loop points not great, work on later
-    start: 0x1a46
-    length: 0x0425
-    #start: 0x1a3b
-    #length: 0x0430
+    volume: 16
+    start: 0xbc5
+    length: 0x04f
+    # only iffily loopable :/
   - id: 9
     source: st01
     name: ST-01/Sweep
